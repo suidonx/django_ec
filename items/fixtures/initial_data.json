@@ -1,0 +1,26 @@
+[
+  {
+    "model": "items.Item",
+    "pk": 1,
+    "fields": {
+      "name": "Fancy Product",
+      "price": 60,
+      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?",
+      "image": "/media/images/450x300.jpg",
+      "created_at": "2025-09-15",
+      "updated_at": "2025-09-15"
+    }
+  },
+  {
+    "model": "items.Item",
+    "pk": 2,
+    "fields": {
+      "name": "Special Item",
+      "price": 20,
+      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?",
+      "image": "/media/images/450x300.jpg",
+      "created_at": "2025-09-15",
+      "updated_at": "2025-09-15"
+    }
+  }
+]
