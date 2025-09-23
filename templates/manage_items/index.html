@@ -2,56 +2,49 @@
 
 <!-- Head-->
 {% block title %}
-管理者用 - Django ECサイト
+管理者用商品一覧ページ - Django ECサイト
 {% endblock title %}
 
 <!-- Body-->
 {% block content %}
-<!-- header-->
+<!-- Header-->
 <header class="bg-primary py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
           <h1 class="display-4 fw-bolder">Django ショップ</h1>
-          <p class="lead fw-normal text-white mb-0">管理者用ページ</p>
+          <p class="lead fw-normal text-white mb-0">管理者用ページです。</p>
         </div>
     </div>
 </header>
 <!-- Section-->
-<section class="py-5">
-  <div class="container px-4 px-lg-5 mt-5">
-    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-      {% for item in object_list %}
-      <div class="col mb-5">
-        <div class="card h-100">
-          <!-- Sale badge-->
-          <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">セール</div>
-          <!-- Product image-->
-          <a href="{% url "items:detail" item.id %}"><img class="card-img-top" src="{{ item.image.url }}" alt="..." /></a>
-          <!-- Product details-->
-          <div class="card-body p-4">
-            <div class="text-center">
-              <!-- Product name-->
-              <h5 class="fw-bolder">{{ item.name }}</h5>
-              <!-- Product reviews-->
-              <div class="d-flex justify-content-center small text-warning mb-2">
-                <div class="bi-star-fill"></div>
-                <div class="bi-star-fill"></div>
-                <div class="bi-star-fill"></div>
-                <div class="bi-star-fill"></div>
-                <div class="bi-star-fill"></div>
-              </div>
-              <!-- Product price-->
-              {{ item.price }}円
-            </div>
-          </div>
-            <!-- Product actions-->
-            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-              <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">カートに追加</a></div>
-            </div>
-        </div>
-      </div>
-      {% endfor%}
+<section>
+  <div class="container px-4 px-lg-5 my-5">
+    <h2 class="text-center my-5">🎁商品一覧</h2>
+    <div class="text-end">
+      <a class="btn btn-primary d-inline-block mb-5" role="button" href="{% url "manage_items:create" %}"><i class="bi bi-plus-square me-2"></i>商品の新規作成</a>
     </div>
+    <table class="table table-striped table-borderd table-hover border-primary">
+      <thead>
+        <tr class="text-center">
+          {% for name in fields_names %}
+          <th>{{ name }}</th>
+          {% endfor %}
+          <th class="col-1 text-success fw-bold"><i class="bi bi-pencil-square"></i></th>
+          <th class="col-1 text-danger fw-bold"><i class="bi bi-trash"></i></th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+          {% for attr in attrs %}
+        <tr class="text-center">
+            {% for content in attr %}
+              <td>{{ content }}</td>
+            {% endfor%}
+            <td class=><button type="submit" class="btn btn-success">編集</button></td>
+            <td class=><button type="submit" class="btn btn-danger">削除</button></td>
+        </tr>
+          {% endfor%}
+      </tbody>
+    </table>
   </div>
 </section>
 {% endblock content %}
