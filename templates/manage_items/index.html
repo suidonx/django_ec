@@ -26,23 +26,27 @@
     <table class="table table-striped table-borderd table-hover border-primary">
       <thead>
         <tr class="text-center">
-          {% for name in fields_names %}
-          <th>{{ name }}</th>
+          {% for field_name in fields_names %}
+            <th>{{ field_name }}</th>
           {% endfor %}
           <th class="col-1 text-success fw-bold"><i class="bi bi-pencil-square"></i></th>
           <th class="col-1 text-danger fw-bold"><i class="bi bi-trash"></i></th>
         </tr>
       </thead>
       <tbody class="table-group-divider">
-          {% for attr in attrs %}
-        <tr class="text-center">
-            {% for content in attr %}
-              <td>{{ content }}</td>
-            {% endfor%}
-            <td class=><button type="submit" class="btn btn-success">編集</button></td>
-            <td class=><button type="submit" class="btn btn-danger">削除</button></td>
-        </tr>
-          {% endfor%}
+          {% for object in object_dict %}
+            <tr class="text-center">
+              {% for key, value in object.items %}
+                <td>{{ value }}</td>
+              {% endfor %}
+                <td>
+                  <a class="btn btn-success" role="button" href="{% url "manage_items:update" object.id %}">編集</a>
+                </td>
+                <td>
+                  <a class="btn btn-danger" role="button" href="">削除</a>
+                </td>
+            </tr>
+          {% endfor %}
       </tbody>
     </table>
   </div>

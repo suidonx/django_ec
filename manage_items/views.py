@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.views.generic.list import ListView
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 
 from items.models import Item
 from .forms import ItemForm
@@ -34,3 +34,10 @@ class CreateItem(CreateView):
     success_url = reverse_lazy("manage_items:index")
     form_class = ItemForm
     template_name = "manage_items/create.html"
+
+
+class UpdateItem(UpdateView):
+    model = Item
+    form_class = ItemForm
+    success_url = reverse_lazy("manage_items:index")
+    template_name = "manage_items/update.html"
