@@ -36,7 +36,7 @@
       <tbody class="table-group-divider">
           {% for object in object_dict %}
             <tr class="text-center">
-              {% for key, value in object.items %}
+              {% for value in object.values %}
                 <td>{{ value }}</td>
               {% endfor %}
                 <td>
