@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.shortcuts import redirect
 from django.views.generic.list import ListView
+from django.views.generic import CreateView
 
 from items.models import Item
+from .forms import CreateItemForm
 
 
 # Create your views here.
@@ -31,3 +34,9 @@ class Index(ListView):
         }
         context.update(extra_context)
         return context
+
+
+class CreateItem(CreateView):
+    success_url = reverse_lazy("manage_items:index")
+    form_class = CreateItemForm
+    template_name = "manage_items/create.html"
