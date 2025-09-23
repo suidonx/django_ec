@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}
+管理者用商品編集ページ - Django ECサイト
+{% endblock title %}
+
+{% block content %}
+<!-- header -->
+<header class="bg-primary py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+          <h1 class="display-4 fw-bolder">Django ショップ</h1>
+          <p class="lead fw-normal text-white mb-0">管理者用ページです。</p>
+        </div>
+    </div>
+</header>
+<!-- body -->
+<section class="container px-4 px-lg-5 my-5">
+  <h2>商品の削除</h2>
+  <p>商品を削除する場合は、削除ボタンを押してください。</p>
+  <div class="my-5">
+    <dl> 
+      <dt>対象商品</dt>
+      <dd>{{ object.name }}</dd>
+      <dd><img src="{{ object.image.url }}" alt=""></dd>
+    </dl>
+  </div>
+  <form action="{% url "manage_items:delete" object.id %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger"><i class="bi bi-trash me-1"></i>削除</button>
+  </form>
+  <a class="btn btn-secondary pl-5 mt-4" role="button" href="{% url "manage_items:index" %}"><i class="bi bi-arrow-left-short me-1"></i>商品一覧ページに戻る</a>
+</section>
+{% endblock content %}

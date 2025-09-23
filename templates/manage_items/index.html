@@ -43,7 +43,7 @@
                   <a class="btn btn-success" role="button" href="{% url "manage_items:update" object.id %}">編集</a>
                 </td>
                 <td>
-                  <a class="btn btn-danger" role="button" href="">削除</a>
+                  <a class="btn btn-danger" role="button" href="{% url "manage_items:delete" object.id %}">削除</a>
                 </td>
             </tr>
           {% endfor %}
