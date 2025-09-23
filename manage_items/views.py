@@ -18,19 +18,13 @@ class Index(ListView):
         fields = Item._meta.get_fields()
         fields_names = [v.name for v in fields]
 
-        # 各レコードの属性値を取得
-        items = Item.objects.all()
-        attrs = []
-        for item in items:
-            attr = []
-            for field in fields_names:
-                attr.append(getattr(item, field))
-            attrs.append(attr)
+        # モデルオブジェクトの辞書化
+        object_dict = Item.objects.all().values()
 
         context = super().get_context_data(**kwargs)
         extra_context = {
             "fields_names": fields_names,
-            "attrs": attrs,
+            "object_dict": object_dict,
         }
         context.update(extra_context)
         return context
