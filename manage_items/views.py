@@ -4,7 +4,7 @@ from django.views.generic.list import ListView
 from django.views.generic import CreateView
 
 from items.models import Item
-from .forms import CreateItemForm
+from .forms import ItemForm
 
 
 # Create your views here.
@@ -38,5 +38,5 @@ class Index(ListView):
 
 class CreateItem(CreateView):
     success_url = reverse_lazy("manage_items:index")
-    form_class = CreateItemForm
+    form_class = ItemForm
     template_name = "manage_items/create.html"
