@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     "items.apps.ItemsConfig",
+    "manage_items.apps.ManageItemsConfig",
 ]
 
 MIDDLEWARE = [
@@ -141,3 +142,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+# Basic Auth
+BASICAUTH_USERS = env.dict("BASICAUTH_USERS")
