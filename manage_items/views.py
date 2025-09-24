@@ -2,12 +2,15 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.views.generic.list import ListView
 from django.views.generic import CreateView, UpdateView, DeleteView
+from django.utils.decorators import method_decorator
+from basicauth.decorators import basic_auth_required
 
 from items.models import Item
 from .forms import ItemForm
 
 
 # Create your views here.
+@method_decorator(basic_auth_required, name="dispatch")
 class Index(ListView):
     template_name = "manage_items/index.html"
     model = Item
@@ -30,12 +33,14 @@ class Index(ListView):
         return context
 
 
+@method_decorator(basic_auth_required, name="dispatch")
 class CreateItem(CreateView):
     success_url = reverse_lazy("manage_items:index")
     form_class = ItemForm
     template_name = "manage_items/create.html"
 
 
+@method_decorator(basic_auth_required, name="dispatch")
 class UpdateItem(UpdateView):
     model = Item
     form_class = ItemForm
@@ -43,6 +48,7 @@ class UpdateItem(UpdateView):
     template_name = "manage_items/update.html"
 
 
+@method_decorator(basic_auth_required, name="dispatch")
 class DeleteItem(DeleteView):
     model = Item
     success_url = reverse_lazy("manage_items:index")
