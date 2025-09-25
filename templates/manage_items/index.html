@@ -1,54 +1,58 @@
 {% extends "base.html" %}
-
 <!-- Head-->
 {% block title %}
-管理者用商品一覧ページ - Django ECサイト
+  管理者用商品一覧ページ - Django ECサイト
 {% endblock title %}
-
 <!-- Body-->
 {% block content %}
-<!-- Header-->
-<header class="bg-primary py-5">
+  <!-- header-->
+  <header class="bg-primary py-5">
     <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-          <h1 class="display-4 fw-bolder">Django ショップ</h1>
-          <p class="lead fw-normal text-white mb-0">管理者用ページです。</p>
-        </div>
+      <div class="text-center text-white">
+        <h1 class="display-4 fw-bolder">Django ショップ</h1>
+        <p class="lead fw-normal text-white mb-0">管理者用ページです。</p>
+      </div>
     </div>
-</header>
-<!-- Section-->
-<section>
-  <div class="container px-4 px-lg-5 my-5">
-    <h2 class="text-center my-5">🎁商品一覧</h2>
-    <div class="text-end">
-      <a class="btn btn-primary d-inline-block mb-5" role="button" href="{% url "manage_items:create" %}"><i class="bi bi-plus-square me-2"></i>商品の新規作成</a>
-    </div>
-    <table class="table table-striped table-borderd table-hover border-primary">
-      <thead>
-        <tr class="text-center">
-          {% for field_name in fields_names %}
-            <th>{{ field_name }}</th>
-          {% endfor %}
-          <th class="col-1 text-success fw-bold"><i class="bi bi-pencil-square"></i></th>
-          <th class="col-1 text-danger fw-bold"><i class="bi bi-trash"></i></th>
-        </tr>
-      </thead>
-      <tbody class="table-group-divider">
+  </header>
+  <!-- Section-->
+  <section>
+    <div class="container px-4 px-lg-5 my-5">
+      <h2 class="text-center my-5">🎁商品一覧</h2>
+      <div class="text-end">
+        <a class="btn btn-primary d-inline-block mb-5"
+           role="button"
+           href="{% url "manage_items:create" %}"><i class="bi bi-plus-square me-2"></i>商品の新規作成</a>
+      </div>
+      <table class="table table-striped table-borderd table-hover border-primary">
+        <thead>
+          <tr class="text-center">
+            {% for field_name in fields_names %}<th>{{ field_name }}</th>{% endfor %}
+            <th class="col-1 text-success fw-bold">
+              <i class="bi bi-pencil-square"></i>
+            </th>
+            <th class="col-1 text-danger fw-bold">
+              <i class="bi bi-trash"></i>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
           {% for object in object_dict %}
             <tr class="text-center">
-              {% for value in object.values %}
-                <td>{{ value }}</td>
-              {% endfor %}
-                <td>
-                  <a class="btn btn-success" role="button" href="{% url "manage_items:update" object.id %}">編集</a>
-                </td>
-                <td>
-                  <a class="btn btn-danger" role="button" href="{% url "manage_items:delete" object.id %}">削除</a>
-                </td>
+              {% for value in object.values %}<td>{{ value }}</td>{% endfor %}
+              <td>
+                <a class="btn btn-success"
+                   role="button"
+                   href="{% url "manage_items:update" object.id %}">編集</a>
+              </td>
+              <td>
+                <a class="btn btn-danger"
+                   role="button"
+                   href="{% url "manage_items:delete" object.id %}">削除</a>
+              </td>
             </tr>
           {% endfor %}
-      </tbody>
-    </table>
-  </div>
-</section>
+        </tbody>
+      </table>
+    </div>
+  </section>
 {% endblock content %}
