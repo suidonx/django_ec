@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.sessions.models import Session
+from django.db import models
 
 from items.models import Item
 
@@ -22,3 +22,7 @@ class CartItem(models.Model):
                 check=models.Q(unit_price__gt=0), name="unit_price_gt_0"
             ),
         ]
+
+    @property
+    def total_amount(self):
+        return self.unit_price * self.quantity
