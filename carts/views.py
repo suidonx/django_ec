@@ -1,10 +1,11 @@
 from django.contrib.sessions.models import Session
-from django.urls import reverse, reverse_lazy
-from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.shortcuts import redirect, get_object_or_404
 from django.views import View
 from django.views.generic import ListView
 
 from .models import CartItem
+from .forms import AddToCartForm
 from items.models import Item
 
 
@@ -19,22 +20,31 @@ class AddToCart(View):
         return redirect(reverse("items:index"))
 
     def post(self, request, pk):
-        item = Item.objects.get(id=pk)
-        request.session.setdefault("item_in_cart", True)
+        item = get_object_or_404(Item, id=pk)
+        request.session.setdefault("cart", True)
         session = Session.objects.get(session_key=request.session.session_key)
 
-        try:
-            item_in_cart = CartItem.objects.get(session=session, item=item)
-            item_in_cart.quantity += 1
+        item_in_cart, created = CartItem.objects.get_or_create(
+            item=item,
+            session=session,
+            defaults={
+                "item": item,
+                "session": session,
+                "unit_price": item.price,
+                "quantity": 1,
+            },
+        )
+
+        form = AddToCartForm(request.POST)
+
+        if form.is_valid():
+            quantity = form.cleaned_data["quantity"]
+
+            if not created:
+                item_in_cart.quantity += quantity
             item_in_cart.save()
 
-        except CartItem.DoesNotExist:
-            CartItem.objects.create(
-                session=session,
-                item=item,
-                unit_price=item.price,
-                quantity=1,
-            )
-            return redirect(reverse("items:index"))
+            return redirect("carts:index")
+
         else:
-            return redirect(reverse("items:index"))
+            return redirect("items:index")

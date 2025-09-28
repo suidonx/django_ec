@@ -51,7 +51,8 @@
                 <div class="text-center">
                   <form action="{% url "carts:add" item.id %}" method="post">
                     {% csrf_token %}
-                    <button class="btn btn-outline-dark mt-auto">カートに追加</button>
+                    <input type="hidden" name="quantity" value="1">
+                    <button class="btn btn-outline-dark mt-auto" type="submit">カートに追加</button>
                   </form>
                 </div>
               </div>
