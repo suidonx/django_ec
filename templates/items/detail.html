@@ -22,15 +22,13 @@
           </div>
           <p class="lead">{{ object.content }}</p>
           <!-- カートに追加機能 -->
-          <form action="{% url "carts:add" object.id %}" method="post">
+          <form action="{% url "carts:add" object.id %}" method="post" class="d-flex">
             {% csrf_token %}
-            <div class="d-flex">
-              {{ form.as_p }}
-              <button class="ms-5 btn btn-outline-dark" type="submit">
-                <i class="bi-cart-fill me-1"></i>
-                カートに追加
-              </button>
-            </div>
+            <div style="max-width: 5rem;" class="">{{ form.as_p }}</div>
+            <button class="btn btn-outline-dark h-100 ms-5" type="submit">
+              <i class="bi-cart-fill me-1"></i>
+              カートに追加
+            </button>
           </form>
         </div>
       </div>
@@ -39,7 +37,7 @@
   <!-- Related items section-->
   <section class="py-5 bg-light">
     <div class="container px-4 px-lg-5 mt-5">
-      <h2 class="fw-bolder mb-4 text-center">Related products</h2>
+      <h2 class="fw-bolder mb-4 text-center">最新の商品</h2>
       <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
         <div class="col mb-5">
           <div class="card h-100">

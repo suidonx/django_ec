@@ -24,21 +24,21 @@ class AddToCart(View):
         request.session.setdefault("cart", True)
         session = Session.objects.get(session_key=request.session.session_key)
 
-        item_in_cart, created = CartItem.objects.get_or_create(
-            item=item,
-            session=session,
-            defaults={
-                "item": item,
-                "session": session,
-                "unit_price": item.price,
-                "quantity": 1,
-            },
-        )
-
         form = AddToCartForm(request.POST)
 
         if form.is_valid():
             quantity = form.cleaned_data["quantity"]
+
+            item_in_cart, created = CartItem.objects.get_or_create(
+                item=item,
+                session=session,
+                defaults={
+                    "item": item,
+                    "session": session,
+                    "unit_price": item.price,
+                    "quantity": quantity,
+                },
+            )
 
             if not created:
                 item_in_cart.quantity += quantity
