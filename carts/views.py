@@ -21,7 +21,9 @@ class AddToCart(View):
 
     def post(self, request, pk):
         item = get_object_or_404(Item, id=pk)
-        request.session.setdefault("cart", True)
+
+        # ユーザー特定のため
+        request.session.save()
         session = Session.objects.get(session_key=request.session.session_key)
 
         form = AddToCartForm(request.POST)
