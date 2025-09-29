@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}
+  商品編集ページ - Django ECサイト
+{% endblock title %}
+{% block content %}
+  <!-- header -->
+  <header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+      <div class="text-center text-white">
+        <div class="text-center text-white">
+          <svg xmlns="http://www.w3.org/2000/svg"
+               width="72"
+               height="57"
+               fill="currentColor"
+               class="bi bi-basket d-block mx-auto mb-4"
+               viewBox="0 0 16 16">
+            <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 13.5V9a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.217L5.07 1.243a.5.5 0 0 1 .686-.172zM2 9v4.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9zM1 7v1h14V7zm3 3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 4 10m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 6 10m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 8 10m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5m2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5" />
+          </svg>
+          <h2 class="fw-bolder">カートページ</h2>
+          <p class="lead fw-normal text-white-50 mb-0">Django ECサイトのカートページです。</p>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- body -->
+  <section class="container px-4 px-lg-5 my-5">
+    <h2>商品の削除</h2>
+    <p>商品を削除する場合は、削除ボタンを押してください。</p>
+    <div class="my-5">
+      <dl>
+        <dt>対象商品</dt>
+        <dd>
+          {{ object.item.name }}
+        </dd>
+        <dd>
+          <img src="{{ object.item.image.url }}" alt="">
+        </dd>
+      </dl>
+    </div>
+    <form action="{% url "carts:delete" object.id %}" method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">
+        <i class="bi bi-trash me-1"></i>削除
+      </button>
+    </form>
+    <a class="btn btn-secondary pl-5 mt-4"
+       role="button"
+       href="{% url "carts:index" %}"><i class="bi bi-arrow-left-short me-1"></i>カートページに戻る</a>
+  </section>
+{% endblock content %}

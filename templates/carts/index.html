@@ -38,6 +38,9 @@
                 <small class="text-body-secondary">単価: {{ cart_item.unit_price }}円</small>
                 <small class="text-body-secondary">数量: {{ cart_item.quantity }}個</small>
               </div>
+              <a class="btn btn-danger btn-sm d-flex align-items-center"
+                 role="button"
+                 href="{% url "carts:delete" cart_item.id %}">削除</a>
               <span class="text-body-secondary">{{ cart_item.calc_total_amount }}円</span>
             </li>
           {% empty %}

@@ -48,3 +48,9 @@ class AddToCart(View):
 
         else:
             return redirect("items:index")
+
+
+class DeleteCartItem(DeleteView):
+    template_name = "carts/delete.html"
+    model = CartItem
+    success_url = reverse_lazy("carts:index")
