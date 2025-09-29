@@ -24,4 +24,6 @@ INSTALLED_APPS = [
     "cloudinary_storage",
     "cloudinary",
     "items.apps.ItemsConfig",
+    "manage_items.apps.ManageItemsConfig",
+    "carts.apps.CartsConfig",
 ]
