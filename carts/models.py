@@ -28,5 +28,5 @@ class CartItem(models.Model):
         ]
 
     @property
-    def total_amount(self):
+    def calc_total_amount(self):
         return self.unit_price * self.quantity

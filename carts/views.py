@@ -1,8 +1,8 @@
 from django.contrib.sessions.models import Session
-from django.urls import reverse
-from django.shortcuts import redirect, get_object_or_404
+from django.urls import reverse, reverse_lazy
+from django.shortcuts import redirect, get_object_or_404, render
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import ListView, DeleteView
 
 from .models import CartItem
 from .forms import AddToCartForm

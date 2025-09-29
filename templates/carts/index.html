@@ -27,18 +27,22 @@
     <div class="m-5 row g-5">
       <div class="col-md-5 col-lg-4 order-md-last">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary">カート</span> <span class="badge bg-primary rounded-pill">1,000</span>
+          <span class="text-primary">カート</span> <span class="badge bg-primary rounded-pill">{{ item_in_cart.count }}</span>
         </h4>
         <!-- カート内商品一覧 -->
         <ul class="list-group mb-3">
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Product name</h6>
-              <small class="text-body-secondary">単価: 金額:</small>
-              <small class="text-body-secondary"></small>
-            </div>
-            <span class="text-body-secondary">$12</span>
-          </li>
+          {% for cart_item in item_in_cart %}
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+              <div>
+                <h6 class="my-0">{{ cart_item.item.name }}</h6>
+                <small class="text-body-secondary">単価: {{ cart_item.unit_price }}円</small>
+                <small class="text-body-secondary">数量: {{ cart_item.quantity }}個</small>
+              </div>
+              <span class="text-body-secondary">{{ cart_item.calc_total_amount }}円</span>
+            </li>
+          {% empty %}
+            <li class="list-group-item">カート内に商品がありません。</li>
+          {% endfor %}
           <!-- PROMOコード -->
           <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
             <div class="text-success">
@@ -49,7 +53,7 @@
           </li>
           <!-- 合計 -->
           <li class="list-group-item d-flex justify-content-between">
-            <span>合計金額</span> <strong>1,000,000円</strong>
+            <span>合計金額</span> <strong>{{ purchase_amount }}</strong>
           </li>
         </ul>
         <form class="card p-2">
