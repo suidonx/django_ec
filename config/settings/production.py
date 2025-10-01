@@ -26,4 +26,5 @@ INSTALLED_APPS = [
     "items.apps.ItemsConfig",
     "manage_items.apps.ManageItemsConfig",
     "carts.apps.CartsConfig",
+    "checkouts.apps.CheckoutsConfig",
 ]
