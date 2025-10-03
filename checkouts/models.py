@@ -26,11 +26,15 @@ class BillingAddress(models.Model):
     address2 = models.CharField(null=True, blank=True)
     country = models.CharField(choices=COUNTRY_CHOICES)
     state = models.CharField(choices=STATE_CHOICES)
-    zip = models.CharField(validators=[RegexValidator(r"\d{7}")])
+    zip = models.CharField(max_length=7, validators=[RegexValidator(r"\d{7}")])
     name_on_card = models.CharField()
-    credit_card_number = models.CharField(validators=[RegexValidator(r"\d{14}")])
-    expiration = models.DateField()
-    cvv = models.CharField(validators=[RegexValidator(r"\d{3}")])
+    credit_card_number = models.CharField(
+        max_length=16, validators=[RegexValidator(r"\d{16}")]
+    )
+    expiration = models.CharField(
+        max_length=5, validators=[RegexValidator(r"\d{2}/\d{2}")]
+    )
+    cvv = models.CharField(max_length=3, validators=[RegexValidator(r"\d{3}")])
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -42,3 +46,7 @@ class OrderItem(models.Model):
     quantity = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def calc_total_amount(self):
+        return self.unit_price * self.quantity

@@ -148,3 +148,9 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 # Basic Auth
 BASICAUTH_USERS = env.dict("BASICAUTH_USERS")
+
+# Date Input Format
+DATE_INPUT_FORMATS = [
+    "%m/%y",
+]
+
