@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
@@ -36,6 +37,8 @@ class CheckOut(View):
                         quantity=cart_item.quantity,
                     )
 
+                messages.success(request, "購入ありがとうございます")
+
                 return redirect("items:index")
 
             # フォームのバリデーションエラー
@@ -44,4 +47,5 @@ class CheckOut(View):
 
         # カート内に商品がないとき
         else:
+            messages.error(request, "カートに商品がありません")
             return render(request, "carts/index.html", context={"form": form})
