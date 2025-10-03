@@ -1,5 +1,7 @@
 from django.contrib import messages
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
 from django.urls import reverse
 from django.views import View
 
@@ -38,6 +40,22 @@ class CheckOut(View):
                     )
 
                 messages.success(request, "購入ありがとうございます")
+
+                purchase_amount = sum(
+                    [cart_item.calc_total_amount for cart_item in cart_items]
+                )
+                send_mail(
+                    subject="購入明細",
+                    message=render_to_string(
+                        "checkouts/purchase_notification_mail.txt",
+                        {
+                            "cart_items": cart_items,
+                            "purchase_amount": purchase_amount,
+                        },
+                    ),
+                    from_email=None,
+                    recipient_list=[billing_address.email],
+                )
 
                 return redirect("items:index")
 

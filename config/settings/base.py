@@ -154,3 +154,11 @@ DATE_INPUT_FORMATS = [
     "%m/%y",
 ]
 
+# send mail config
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = f"Django Shop <{EMAIL_HOST_USER}>"
