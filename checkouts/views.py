@@ -57,6 +57,7 @@ class CheckOut(View):
                     recipient_list=[billing_address.email],
                 )
 
+                request.session.flush()
                 return redirect("items:index")
 
             # フォームのバリデーションエラー
