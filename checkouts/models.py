@@ -17,7 +17,7 @@ class BillingAddress(models.Model):
         ("", "選択してください"),
         ("Tokyo", "東京"),
     ]
-    purchased_id = models.ForeignKey(PurchaseHistory, on_delete=models.CASCADE)
+    purchased_id = models.OneToOneField(PurchaseHistory, on_delete=models.CASCADE)
     first_name = models.CharField()
     last_name = models.CharField()
     user_name = models.CharField()
