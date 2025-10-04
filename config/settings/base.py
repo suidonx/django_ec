@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "manage_items.apps.ManageItemsConfig",
     "carts.apps.CartsConfig",
     "checkouts.apps.CheckoutsConfig",
+    "manage_purchases.apps.ManagePurchasesConfig",
 ]
 
 MIDDLEWARE = [
