@@ -1,0 +1,12 @@
+ご購入ありがとうございます。
+
+--お客様が購入した商品--
+
+{% for cart_item in cart_items %}
+商品名： {{cart_item.item.name}}
+単価： {{cart_item.unit_price}}円
+数量: {{cart_item.quantity}}個
+{% endfor %}
+金額： {{ purchase_amount }}円
+
+お問い合わせ： info@example.com

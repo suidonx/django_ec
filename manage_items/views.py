@@ -18,7 +18,7 @@ class Index(ListView):
     # コンテキストを追加
     def get_context_data(self, **kwargs):
         # フィールド名の一覧を取得
-        fields = Item._meta.get_fields()
+        fields = Item._meta.local_fields
         fields_names = [v.name for v in fields]
 
         # モデルオブジェクトの辞書化

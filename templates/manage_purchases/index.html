@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+<!-- Head-->
+{% block title %}
+  購入明細一覧ページ - Django ECサイト
+{% endblock title %}
+<!-- Body-->
+{% block content %}
+  <!-- header-->
+  <header class="bg-info py-5">
+    <div class="container px-4 px-lg-5 my-5">
+      <div class="text-center text-white">
+        <h1 class="display-4 fw-bolder">Django ショップ</h1>
+        <p class="lead fw-normal text-white mb-0">購入明細一覧ページです。</p>
+      </div>
+    </div>
+  </header>
+  <!-- Section-->
+  <section>
+    <div class="container px-4 px-lg-5 my-5">
+      <h2 class="text-center my-5">購入明細一覧</h2>
+      <table class="table p-2">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>ユーザー名</th>
+            <th>ユーザーアカウント</th>
+            <th>メールアドレス</th>
+            <th>購入日</th>
+            <th>購入詳細</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for object in object_list %}
+            <tr>
+              <td>{{ object.id }}</td>
+              <td>{{ object.billingaddress.first_name }}{{ object.billingaddress.last_name }}</td>
+              <td>@{{ object.billingaddress.user_name }}</td>
+              <td>{{ object.billingaddress.email }}</td>
+              <td>{{ object.purchased_at }}</td>
+              <td>
+                <a href="{% url "manage_purchases:detail" object.id %}">購入詳細</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  {% endblock content %}

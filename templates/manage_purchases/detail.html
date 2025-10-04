@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+<!-- Head-->
+{% block title %}
+  購入商品の詳細ページ - Django ECサイト
+{% endblock title %}
+<!-- Body-->
+{% block content %}
+  <!-- header-->
+  <header class="bg-info py-5">
+    <div class="container px-4 px-lg-5 my-5">
+      <div class="text-center text-white">
+        <h1 class="display-4 fw-bolder">Django ショップ</h1>
+        <p class="lead fw-normal text-white mb-0">購入商品の詳細ページです。</p>
+      </div>
+    </div>
+  </header>
+  <!-- Section-->
+  <section>
+    <div class="container px-4 px-lg-5 my-5">
+      <h2 class="text-center my-5">購入商品詳細一覧</h2>
+      <table class="table p-2">
+        <thead class="text-center">
+          <tr>
+            <th>商品名</th>
+            <th>単価</th>
+            <th>数量</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+          {% for object in order_item %}
+            <tr>
+              <td>{{ object.name }}</td>
+              <td>{{ object.unit_price }}円</td>
+              <td>{{ object.quantity }}個</td>
+              <td>{{ object.calc_total_amount }}円</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="text-end">
+        <p class="fs-4">合計数量: {{ sum_count }}個</p>
+        <p class="fs-4">合計金額: {{ purchase_amount }}円</p>
+      </div>
+      <a class="btn btn-secondary pl-5 mt-4"
+         role="button"
+         href="{% url "manage_purchases:index" %}"><i class="bi bi-arrow-left-short me-1"></i>一覧ページに戻る</a>
+    </section>
+  {% endblock content %}
