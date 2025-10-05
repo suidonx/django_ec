@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "carts.apps.CartsConfig",
     "checkouts.apps.CheckoutsConfig",
     "manage_purchases.apps.ManagePurchasesConfig",
+    "promotions.apps.PromotionsConfig",
 ]
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
