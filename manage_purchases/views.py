@@ -24,12 +24,23 @@ class PurchaseDetail(View):
         purchase_amount = sum([item.calc_total_amount for item in order_item])
         sum_count = order_item.aggregate(sum_count=Sum("quantity"))["sum_count"]
 
+        context = {
+            "order_item": order_item,
+            "purchase_amount": purchase_amount,
+            "sum_count": sum_count,
+        }
+
+        # プロモーションコードが使われていた場合は割引処理
+        if purchase_history.promotion_code:
+            discount = purchase_history.promotion_code.discount_amount
+            promotion_code = purchase_history.promotion_code.code
+            context["discount"] = discount
+            context["promotion_code"] = promotion_code
+
+            purchase_amount = max(purchase_amount - discount, 0)
+
         return render(
             request,
             "manage_purchases/detail.html",
-            {
-                "order_item": order_item,
-                "purchase_amount": purchase_amount,
-                "sum_count": sum_count,
-            },
+            context=context,
         )

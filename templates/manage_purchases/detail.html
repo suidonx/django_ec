@@ -39,8 +39,15 @@
         </tbody>
       </table>
       <div class="text-end">
-        <p class="fs-4">合計数量: {{ sum_count }}個</p>
-        <p class="fs-4">合計金額: {{ purchase_amount }}円</p>
+        <p>合計数量: {{ sum_count }}個</p>
+        {% if discount %}
+          <p class="text-danger">
+            割引額： {{ discount }}円
+            <br>
+            <small>プロモーションコード: {{ promotion_code }}</small>
+          </p>
+        {% endif %}
+        <p class="fs-5 fw-bold mt-2">合計金額: {{ purchase_amount }}円</p>
       </div>
       <a class="btn btn-secondary pl-5 mt-4"
          role="button"
