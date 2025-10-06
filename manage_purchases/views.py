@@ -34,10 +34,10 @@ class PurchaseDetail(View):
         if purchase_history.promotion_code:
             discount = purchase_history.promotion_code.discount_amount
             promotion_code = purchase_history.promotion_code.code
+            purchase_amount = max(purchase_amount - discount, 0)
             context["discount"] = discount
             context["promotion_code"] = promotion_code
-
-            purchase_amount = max(purchase_amount - discount, 0)
+            context["purchase_amount"] = purchase_amount
 
         return render(
             request,
