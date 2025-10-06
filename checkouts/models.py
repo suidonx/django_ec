@@ -1,9 +1,17 @@
 from django.db import models
 from django.core.validators import RegexValidator
 
+from promotions.models import PromotionCode
+
 
 # Create your models here.
 class PurchaseHistory(models.Model):
+    promotion_code = models.OneToOneField(
+        PromotionCode,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
     purchased_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
