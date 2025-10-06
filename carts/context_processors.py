@@ -3,7 +3,7 @@ from .models import CartItem
 from checkouts.forms import BillingAddressForm
 
 
-# ユーザーのカート情報をテンプレート共通のコンテキスト化
+# ユーザーのカート情報、請求先入力フォーム、カート内アイテムの合計金額をテンプレート共通のコンテキスト化
 def item_in_cart(request):
     item_in_cart = (
         CartItem.objects.all()
@@ -15,6 +15,10 @@ def item_in_cart(request):
 
     purchase_amount = sum([cart_item.calc_total_amount for cart_item in item_in_cart])
 
+    # Promotion Codeが適用されている場合は割引
+    discount = request.session.get("discount", None)
+    if discount:
+        purchase_amount = max(purchase_amount - discount, 0)
 
     return {
         "item_in_cart": item_in_cart,

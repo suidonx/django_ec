@@ -52,22 +52,31 @@
             <li class="list-group-item">カート内に商品がありません。</li>
           {% endfor %}
           <!-- PROMOコード -->
-          <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
-            <div class="text-success">
-              <h6 class="my-0">プロモーションコード</h6>
-              <small>2143643487</small>
-            </div>
-            <span class="text-success">−$5</span>
-          </li>
+          {% if request.session.applied %}
+            <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
+              <div class="text-success">
+                <h6 class="my-0">プロモーションコード</h6>
+                <small>{{ request.session.promotion_code }}</small>
+              </div>
+              <span class="text-success">−{{ request.session.discount }}円</span>
+            </li>
+          {% endif %}
           <!-- 合計 -->
           <li class="list-group-item d-flex justify-content-between">
             <span>合計金額</span> <strong>{{ purchase_amount }}円</strong>
           </li>
         </ul>
-        <form class="card p-2">
+        <!-- Promotion Code Apply Form -->
+        <form class="card p-2" method="post" action="{% url "promotions:apply" %}">
+          {% csrf_token %}
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="コードを入力">
+            <input type="text"
+                   class="form-control"
+                   placeholder="コードを入力"
+                   name="promotion_code"
+                   maxlength="7">
             <button type="submit" class="btn btn-secondary">適用</button>
+            <div class="invalid-feedback d-block">{{ apply_error }}</div>
           </div>
         </form>
       </div>
