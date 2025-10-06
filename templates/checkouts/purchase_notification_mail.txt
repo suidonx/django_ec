@@ -6,7 +6,15 @@
 商品名： {{cart_item.item.name}}
 単価： {{cart_item.unit_price}}円
 数量: {{cart_item.quantity}}個
+小計： {{cart_item.calc_total_amount}}円
 {% endfor %}
-金額： {{ purchase_amount }}円
+{% if promotion_code %}
+プロモーションコードの適用: {{promotion_code}}
+{% endif %}
+{% if discount %}
+割引額： {{ discount }}円
+{% endif %}
+
+合計金額： {{ purchase_amount }}円
 
 お問い合わせ： info@example.com
