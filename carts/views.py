@@ -1,25 +1,24 @@
 from django.contrib.sessions.models import Session
 from django.urls import reverse, reverse_lazy
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404, render
 from django.views import View
 from django.views.generic import DeleteView, ListView
 
 from .models import CartItem
 from .forms import AddToCartForm
 from items.models import Item
-from checkouts.forms import BillingAddressForm
 
 
 # Create your views here.
-class IndexCart(ListView):
-    template_name = "carts/index.html"
-    model = CartItem
-    success_url = reverse_lazy("carts:index")
+class IndexCart(View):
+    def get(self, request):
+        cart_items = CartItem.objects.filter(session=request.session.session_key)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["form"] = BillingAddressForm
-        return context
+        # カートに商品がない時、sessionのpromotion code情報を初期化する。
+        if not cart_items:
+            request.session.clear()
+
+        return render(request, "carts/index.html")
 
 
 class AddToCart(View):

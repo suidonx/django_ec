@@ -26,6 +26,7 @@
             <th>ユーザーアカウント</th>
             <th>メールアドレス</th>
             <th>購入日</th>
+            <th>プロモーションコード適用日</th>
             <th>購入詳細</th>
           </tr>
         </thead>
@@ -37,6 +38,9 @@
               <td>@{{ object.billingaddress.user_name }}</td>
               <td>{{ object.billingaddress.email }}</td>
               <td>{{ object.purchased_at }}</td>
+              <td>
+                {% if object.promotion_code %}{{ object.promotion_code.applied_at }}{% endif %}
+              </td>
               <td>
                 <a href="{% url "manage_purchases:detail" object.id %}">購入詳細</a>
               </td>
